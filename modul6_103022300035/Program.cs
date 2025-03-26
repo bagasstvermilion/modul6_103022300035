@@ -4,10 +4,12 @@ class Program
 {
     static void Main()
     {
-        string username = "Bagas Pratama";
-        SayaTubeUser user = new SayaTubeUser(username);
-        String[] filmList =
+        try
         {
+            string username = "Bagas Pratama";
+            SayaTubeUser user = new SayaTubeUser(username);
+            String[] filmList =
+            {
             "Interstellar",
             "Inception",
             "The Dark Knight",
@@ -20,11 +22,17 @@ class Program
             "Shawshank redemption"
         };
 
-       foreach (string film in filmList)
-        {
-            user.addVideo(new SayaTubeVideo($"Review film {film} oleh {username}"));
-        };
+            foreach (string film in filmList)
+            {
+                user.addVideo(new SayaTubeVideo($"Review film {film} oleh {username}"));
+            }
+            ;
 
-        user.printAllVideoPlaycount();
+            user.printAllVideoPlaycount();
+        } catch (Exception e)
+        {
+            Console.WriteLine($"Terjadi error: {e.Message}");
+        }
+        
     }
 }

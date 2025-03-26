@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace modul6_103022300035
             this.id = rand.Next(10000, 99999);
             this.username = user;
             this.uploadedVideos = new List<SayaTubeVideo>();
+            validateInvariant();
         }
 
         public int getTotalVideoPlayCount()
@@ -28,11 +30,13 @@ namespace modul6_103022300035
                 total += uploadedVideos[i].getPlayCount();
             }
             return total;
+            validateInvariant();
         }
 
         public void addVideo(SayaTubeVideo video)
         {
             uploadedVideos.Add(video);
+            validateInvariant();
             
         }
         
@@ -43,6 +47,13 @@ namespace modul6_103022300035
             {
                 Console.WriteLine($"Video {i+1} judul: {uploadedVideos[i].getTitle()}");
             }
+            validateInvariant()
+        }
+
+        private void validateInvariant()
+        {
+            Debug.Assert(this.username.Length > 0 && this.username.Length <= 100, "maksimal karakter username 100");
+            Debug.Assert(this.uploadedVideos != null, "Video tidak boleh null");
         }
     }
 }
